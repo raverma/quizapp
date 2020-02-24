@@ -1,0 +1,9 @@
+<div clas="row">
+  <div class="col-md-5 offset-sm-3">
+    <div *ngIf="message"
+      [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
+      {{message.text}}
+      <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+    </div>
+  </div>
+</div>
