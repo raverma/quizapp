@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
     <span>Quiz App</span>
     <ul>
+        <li *ngIf="userIsAuthenticated"><a mat-button routerLink="/questions" routerLinkActive="mat-accent">Question Bank</a></li>
         <li *ngIf="!userIsAuthenticated"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></li>
         <li *ngIf="!userIsAuthenticated"><a mat-button routerLink="/signup" routerLinkActive="mat-accent">Sign Up</a></li>
         <li *ngIf="userIsAuthenticated"><a mat-button (click)="onLogout()">Logout</a></li>

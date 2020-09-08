@@ -1,3 +1,4 @@
+import { QuestionCreateComponent } from './quiz/question-bank/question-create/question-create.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     LoginComponent,
     SignupComponent,
-    ErrorComponent
+    ErrorComponent,
+    QuestionCreateComponent
   ],
   imports: [
     BrowserModule,
