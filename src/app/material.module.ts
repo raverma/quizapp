@@ -8,7 +8,7 @@ import { MatPaginatorModule} from "@angular/material/paginator";
 import { MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { MatDialogModule} from "@angular/material/dialog";
 import { MatIconRegistry } from '@angular/material/icon';
-
+import {MatFormFieldModule} from '@angular/material/form-field'
 
 @NgModule({
     imports: [
@@ -19,8 +19,8 @@ import { MatIconRegistry } from '@angular/material/icon';
         MatExpansionModule,
         MatPaginatorModule,
         MatProgressSpinnerModule,
-        MatDialogModule
-
+        MatDialogModule,
+        MatFormFieldModule
     ],
     exports: [
         MatInputModule,
@@ -30,7 +30,8 @@ import { MatIconRegistry } from '@angular/material/icon';
         MatExpansionModule,
         MatPaginatorModule,
         MatProgressSpinnerModule,
-        MatDialogModule
+        MatDialogModule,
+        MatFormFieldModule
     ],
     providers: [     
     ]

@@ -21,7 +21,7 @@ export class QuestionCreateComponent implements OnInit {
 
   ngOnInit(): void {
       this.form = new FormGroup({
-        type: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)]}),
+        type: new FormControl(null, { validators: [Validators.required, Validators.maxLength(10)]}),
         category: new FormControl(null, {validators: [Validators.required]}),
         text: new FormControl(null, {validators: [Validators.required]}),
         maxScore: new FormControl(null,{validators: [Validators.min(1)]}),
@@ -47,8 +47,9 @@ export class QuestionCreateComponent implements OnInit {
         return;
     }
 
-    const question: Question = {id: this.questionId, type: this.form.value.type, category: this.form.value.category, text: this.form.value.text, maxScore: this.form.value.score ,creator: null};
+    const question: Question = {id: this.questionId, type: this.form.value.type, category: this.form.value.category, text: this.form.value.text, maxScore: this.form.value.maxScore ,creator: null};
     //this.postCreated.emit(post);
+    //console.log(question);
     this.isLoading = true;
     if (this.mode === "edit" ){
         this.questionService.addQuestion(question, this.selectedFile);

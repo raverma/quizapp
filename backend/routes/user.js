@@ -38,7 +38,7 @@ router.post("/api/user/signup", (req, res, next)=> {
 
 router.post("/api/user/login", (req, res, next)=> {
     let fetchedUser;
-    console.log(req);
+ 
     User.findOne({email: req.body.email})
         .then( user => {
             if (!user){

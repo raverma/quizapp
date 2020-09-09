@@ -46,22 +46,27 @@ export class QuestionsService{
     }
 
     addQuestion(question: Question, imageFile: File) {
-        const questiontData = new FormData();
+        const questionData = new FormData();
         //postData.append('id', post.id);
-        questiontData.append('type', question.type);
-        questiontData.append('category', question.category);
-        questiontData.append('text', question.text);
-        questiontData.append('maxScore', question.maxScore.toString());
-        questiontData.append('image', imageFile, imageFile.name);
-        this.http.post<{message: string, post: Question}>("http://localhost:3000/api/questions", questiontData)
+        questionData.append('type', question.type);
+        questionData.append('category', question.category);
+        questionData.append('text', question.text);
+        questionData.append('maxScore', question.maxScore.toString());
+        
+        if (!imageFile == undefined) {
+            questionData.append('image', imageFile, imageFile.name);
+        }
+        console.log(questionData);
+        this.http.post<{message: string, question: Question}>("http://localhost:3000/api/questions", questionData)
                 .subscribe(responseData=> {
                     //post.id = responseData.post.id;
                     //post.imagePath = responseData.post.imagePath;
                     
                     //this.posts.push(post);
                     //this.postsUpdated.next([...this.posts]);
-                    this.router.navigate(["/"]);
-                });
+                    console.log(responseData);
+                    //this.router.navigate(["/"]);
+                }); 
     }
 }
 

@@ -1,10 +1,10 @@
 const express = require('express');
-//const multer = require('multer');
+const multer = require('multer');
 const Question = require('../models/question');
 const { register } = require('ts-node');
 
 const router = express.Router();
-/*const storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: (req, file, cb) =>
      {
         cb(null, "backend/question/images");
@@ -12,37 +12,37 @@ const router = express.Router();
     filename: (req, file, cb) => {
         cb(null, file.originalname.toLowerCase().replace(' ','-')) ;
     }
-});*/
+});
 
-router.post('/api/questions', (req, res, next)=> {
+router.post('/api/questions', multer({storage}).single('image'), (req, res, next)=> {
     const url = req.protocol + "://" + req.get("host");
     let imagePath = null;
     if (!req.file==undefined){
         imagePath =url + "/images/question/" + req.file.filename;
     }
-    console.log(req.body);
+    console.log(req.body.maxScore);
     const question = new Question({
         type: req.body.type,
         category: req.body.category,
         text: req.body.text,
-        maxScore: req.body.score,
+        maxScore: req.body.maxScore,
         imagePath: imagePath 
           
     });
-
+    console.log(question);
     question.save().then((result)=>{
         res.status(201).json(
             {   message: "Your question has been added", 
-                post: {
+                question: {
                     id: result._id,
                     type: result.type,
                     category: result.category,
                     text: result.text,
-                    score: result.maxScore,
+                    maxScore: result.maxScore,
                     imagePath: result.imagePath
                 }
             }
-    )});
+    )}); 
 });
 
 
