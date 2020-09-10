@@ -46,8 +46,10 @@ export class QuestionCreateComponent implements OnInit {
     if (this.form.invalid){
         return;
     }
-
-    const question: Question = {id: this.questionId, type: this.form.value.type, category: this.form.value.category, text: this.form.value.text, maxScore: this.form.value.maxScore ,creator: null};
+    
+    const question: Question = {id: this.questionId, type: this.form.value.type, 
+          category: this.form.value.category, text: this.form.value.text, 
+          maxScore: this.form.value.maxScore, imagePath: this.form.value.imagePath, creator: null};
     //this.postCreated.emit(post);
     //console.log(question);
     this.isLoading = true;
@@ -55,6 +57,7 @@ export class QuestionCreateComponent implements OnInit {
         this.questionService.addQuestion(question, this.selectedFile);
     }
     else{
+        console.log(this.form.value.type);
         this.questionService.addQuestion(question, this.selectedFile);
         this.form.reset();
     }

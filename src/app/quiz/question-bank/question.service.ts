@@ -46,17 +46,18 @@ export class QuestionsService{
     }
 
     addQuestion(question: Question, imageFile: File) {
+        console.log(imageFile);
         const questionData = new FormData();
         //postData.append('id', post.id);
         questionData.append('type', question.type);
         questionData.append('category', question.category);
         questionData.append('text', question.text);
         questionData.append('maxScore', question.maxScore.toString());
-        
-        if (!imageFile == undefined) {
+        if (imageFile !== null) {
+            console.log("image is added");
             questionData.append('image', imageFile, imageFile.name);
         }
-        console.log(questionData);
+        //console.log(questionData);
         this.http.post<{message: string, question: Question}>("http://localhost:3000/api/questions", questionData)
                 .subscribe(responseData=> {
                     //post.id = responseData.post.id;

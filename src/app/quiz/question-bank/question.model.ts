@@ -4,5 +4,6 @@ export interface Question {
     category: string;
     text: string;
     maxScore: number;
+    imagePath: string;
     creator: string;
 }
