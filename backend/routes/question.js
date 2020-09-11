@@ -7,7 +7,7 @@ const router = express.Router();
 const storage = multer.diskStorage({
     destination: (req, file, cb) =>
      {
-        cb(null, "backend/question/images");
+        cb(null, "backend/images/question");
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname.toLowerCase().replace(' ','-')) ;
@@ -17,10 +17,11 @@ const storage = multer.diskStorage({
 router.post('/api/questions', multer({storage}).single('image'), (req, res, next)=> {
     const url = req.protocol + "://" + req.get("host");
     let imagePath = null;
-    if (!req.file==undefined){
+    
+    if (req.file!==null){
         imagePath =url + "/images/question/" + req.file.filename;
     }
-    console.log(req.body.maxScore);
+    console.log(req.file);
     const question = new Question({
         type: req.body.type,
         category: req.body.category,
