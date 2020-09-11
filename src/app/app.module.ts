@@ -13,6 +13,7 @@ import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuestionListComponent } from './quiz/question-bank/question-list/question-list.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     SignupComponent,
     ErrorComponent,
-    QuestionCreateComponent
+    QuestionCreateComponent,
+    QuestionListComponent
   ],
   imports: [
     BrowserModule,

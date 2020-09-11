@@ -1,1 +1,19 @@
-<p>question-list works!</p>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="questions.length > 0 && !isLoading">
+    <mat-expansion-panel *ngFor="let question of questions">
+        <mat-expansion-panel-header>
+            {{question.category}}
+        </mat-expansion-panel-header>
+        <div class="question-image"><img [src]="question.imagePath" [alt]="question.text"></div>
+        <p>{{question.text}}</p>
+        <mat-action-row *ngIf="userIsAuthenticated && loggedInUserId==question.creator">
+            <a mat-button color="primary" [routerLink]="['edit', question.id]">EDIT</a>
+            <button mat-button color="warn" (click)="onDelete(question.id)">DELETE</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalItems" [pageSize]="itemsPerPage" 
+    [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+    *ngIf="totalItems > 0">
+</mat-paginator>
+<p class="info-text" *ngIf="totalItems <= 0 && !isLoading">No questions exists</p>

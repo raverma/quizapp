@@ -16,7 +16,7 @@ export class QuestionsService{
     getQuestions(itemsPerPage: number, currentPage: number) {
         const queryString = `?pageSize=${itemsPerPage}&page=${currentPage}`;
         //return [...this.posts];
-        this.http.get<{ message: string, questions: any, qcount: number}>("http://localhost:3000/api/questions" + queryString)
+        this.http.get<{ message: string, questions: any, questionCount: number}>("http://localhost:3000/api/questions" + queryString)
         .pipe(map((questionData)=> {
             return {
                     questions: questionData.questions.map(question => {
@@ -29,19 +29,19 @@ export class QuestionsService{
                             creator: question.creator
                         };
                     }),
-                    maxQuestions: questionData.qcount
+                    questionCount: questionData.questionCount
                 }
         }))
         .subscribe((mappedQuestionsData)=>{
             this.questions = mappedQuestionsData.questions;
             this.questionsUpdated.next({
                 questions: [...this.questions], 
-                questionCount: mappedQuestionsData.maxQuestions
+                questionCount: mappedQuestionsData.questionCount
             });
         });
     }
 
-    getPostUpdatedListener() {
+    getQuestionUpdatedListener() {
         return this.questionsUpdated.asObservable();
     }
 
